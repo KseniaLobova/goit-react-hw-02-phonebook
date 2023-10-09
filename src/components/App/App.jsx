@@ -1,9 +1,11 @@
-import { Component } from 'react';
-import { ContactForm } from './ContactForm/ContactForm';
-import { ContactList } from './ContactList/ContactList';
-import { Filters } from './Filters/Filters';
-
 import { nanoid } from 'nanoid';
+import { Component } from 'react';
+
+import { ContactForm } from '../ContactForm/ContactForm';
+import { ContactList } from '../ContactList/ContactList';
+import { Filters } from '../Filters/Filters';
+
+import { Wrapper } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -17,11 +19,11 @@ export class App extends Component {
   };
 
   addContact = newContact => {
-    const isContact = this.state.contacts.filter(contact =>
+    const isContact = this.state.contacts.some(contact =>
       contact.name.toLowerCase().includes(newContact.name.toLowerCase())
     );
     if (isContact) {
-      alert('sorry');
+      alert(`${newContact.name} alredy in contacts`);
       return;
     }
     this.setState(prevState => ({
@@ -43,16 +45,25 @@ export class App extends Component {
       contact.name.toLowerCase().includes(newFilter)
     );
   };
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+    console.log(this.deleteContact);
+  };
 
   render() {
     return (
-      <div>
+      <Wrapper>
         <h2>Phonebook</h2>
         <ContactForm onAdd={this.addContact} />
         <h2>Contacts</h2>
         <Filters onChangeFilter={this.onChangeFilter} />
-        <ContactList contacts={this.getVisibleContact()} />
-      </div>
+        <ContactList
+          contacts={this.getVisibleContact()}
+          onDelete={this.deleteContact}
+        />
+      </Wrapper>
     );
   }
 }

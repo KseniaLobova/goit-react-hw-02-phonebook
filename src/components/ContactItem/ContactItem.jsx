@@ -1,8 +1,11 @@
-export const ContactItem = ({ name, number }) => {
+import { WrapItem, Btn, TextItem } from './ContactItem.styled';
+export const ContactItem = ({ name, number, id, onDelete }) => {
   return (
-    <div>
-      <p>{name}:</p>
-      <p>{number}</p>
-    </div>
+    <WrapItem>
+      <TextItem>
+        {name}: {number}
+      </TextItem>
+      <Btn onClick={() => onDelete(id)}>Delete</Btn>
+    </WrapItem>
   );
 };

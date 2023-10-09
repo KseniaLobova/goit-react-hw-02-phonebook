@@ -1,5 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { FormStyled, Label, Input, BtnAdd, Error } from './ContactForm.styled';
 
 const SingupSchema = Yup.object().shape({
   name: Yup.string().required('Required'),
@@ -20,21 +21,21 @@ export const ContactForm = ({ onAdd }) => {
         actions.resetForm();
       }}
     >
-      <Form>
-        <label htmlFor="">
+      <FormStyled>
+        <Label htmlFor="">
           Name
-          <Field type="text" name="name" />
-          <ErrorMessage name="name" />
-        </label>
+          <Input type="text" name="name" />
+          <Error name="name" component="div" />
+        </Label>
 
-        <label htmlFor="">
+        <Label htmlFor="">
           Number
-          <Field type="tel" name="number" />
-          <ErrorMessage name="number" />
-        </label>
+          <Input type="tel" name="number" />
+          <Error name="number" component="div" />
+        </Label>
 
-        <button type="submit">Add contact</button>
-      </Form>
+        <BtnAdd type="submit">Add contact</BtnAdd>
+      </FormStyled>
     </Formik>
   );
 };
