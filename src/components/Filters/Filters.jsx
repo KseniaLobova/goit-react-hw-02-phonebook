@@ -1,5 +1,5 @@
-import { isLabelWithInternallyDisabledControl } from '@testing-library/user-event/dist/utils';
 import { Label, Input } from './Filters.styled';
+
 export const Filters = ({ onChangeFilter }) => {
   return (
     <Label>
